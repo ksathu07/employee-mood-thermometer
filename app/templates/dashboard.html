@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Team Mood Dashboard</h2>
+
+  <form method="get" action="{{ url_for('main.dashboard') }}">
+    <label for="start_date">From</label>
+    <input type="date" id="start_date" name="start_date"
+           value="{{ request.args.get('start_date', '') }}">
+
+    <label for="end_date">To</label>
+    <input type="date" id="end_date" name="end_date"
+           value="{{ request.args.get('end_date', '') }}">
+
+    <button type="submit">Apply</button>
+  </form>
+
+
+  <h3>Mood summary</h3>
+  <ul>
+    <li>Happy: {{ counts.get('HAPPY', 0) }}</li>
+    <li>Neutral: {{ counts.get('NEUTRAL', 0) }}</li>
+    <li>Stressed: {{ counts.get('STRESSED', 0) }}</li>
+    <li>Sad: {{ counts.get('SAD', 0) }}</li>
+  </ul>
+
+  <h3>Recent mood entries</h3>
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>When</th>
+      <th>User</th>
+      <th>Mood</th>
+      <th>Comment</th>
+    </tr>
+    {% for entry, user in recent_entries %}
+      <tr>
+        <td>{{ entry.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ entry.mood_value }}</td>
+        <td>{{ entry.comment or "" }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <p><a href="{{ url_for('main.mood') }}">Back to mood check-in</a></p>
+{% endblock %}

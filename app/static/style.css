@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, select, textarea, button {
+  padding: 8px;
+  font-size: 14px;
+}
+
+button {
+  width: 150px;
+  cursor: pointer;
+}
+
+.message {
+  padding: 8px;
+  background-color: #e0ffe0;
+  border: 1px solid #00aa00;
+}

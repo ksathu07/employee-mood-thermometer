@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>Daily Mood Check-in</h2>
+
+  {% if message %}
+    <p class="message">{{ message }}</p>
+  {% endif %}
+
+  <form method="post" action="{{ url_for('main.mood') }}">
+    <label for="user_name">Your name</label>
+    <input type="text" id="user_name" name="user_name" required>
+
+    <label for="mood_value">Mood</label>
+    <select id="mood_value" name="mood_value" required>
+      <option value="">-- Select mood --</option>
+      <option value="HAPPY">😊 Happy</option>
+      <option value="NEUTRAL">😐 Neutral</option>
+      <option value="STRESSED">😣 Stressed</option>
+      <option value="SAD">😔 Sad</option>
+    </select>
+
+    <label for="comment">Comment (optional)</label>
+    <textarea id="comment" name="comment" rows="3"></textarea>
+
+    <button type="submit">Submit Mood</button>
+  </form>
+{% endblock %}
